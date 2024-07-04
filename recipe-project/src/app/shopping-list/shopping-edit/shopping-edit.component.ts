@@ -18,6 +18,9 @@ export class ShoppingEditComponent implements OnInit {
   }
 
 addIngredient(form:NgForm){
+
+  if(form.valid){
+
   const value:any = form.value;
   const amount = value.amount  //this.amountInput.nativeElement.value;
   const name = value.name //this.nameInput.nativeElement.value;
@@ -25,6 +28,7 @@ addIngredient(form:NgForm){
   this.shoppingServ.addNewIngredient(ingredient);
   this.shoppingServ.ingredientsChanged.next(ingredient);
   // this.ingredientAdded.emit(ingredient);
+  }
 }
 
 }
