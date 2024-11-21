@@ -9,13 +9,27 @@ export class ShoppingListService {
         new Ingredient('Carrot', 5)
     ];
     ingredientsChanged = new Subject<Ingredient[]>();
+    startedEditing = new Subject<number>();
 
     getIngredients() {
         return this.ingredients.slice();    //slice makes a copy of ingredients
     }
+    getSelectedIngredient(index: number) {
+        return this.ingredients[index];
+    }
 
     addNewIngredient(ingredient) {
         this.ingredients.push(ingredient);
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
+    updateIngredient(index:number, ingredient){
+        this.ingredients[index] = ingredient;
+        this.ingredientsChanged.next(this.ingredients.slice());
+
+    }
+    deleteIngredient(index:number){
+        this.ingredients.splice(index,1);
+        this.ingredientsChanged.next(this.ingredients.slice()); 
     }
     addIngredientFromRecipe(ingredient){
         debugger;

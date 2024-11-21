@@ -18,8 +18,11 @@ recipes:Recipe[];
 
   ngOnInit(): void {
     this.recipes = this.recipeServ.getRecipe();
+    this.recipeServ.recipeCHanged.subscribe((recipe)=>{
+      this.recipes = recipe;
+    })
   }
-  addNewRecipe(){
-this.router.navigate(['new'],{relativeTo:this.activeRoute});
+  addNewRecipe() {
+    this.router.navigate(['new'], { relativeTo: this.activeRoute });
   }
 }
