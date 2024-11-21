@@ -16,14 +16,17 @@ igChanged:Subscription
   ngOnInit(): void {  
     this.ingredients = this.shoppingServ.getIngredients();
     this.igChanged = this.shoppingServ.ingredientsChanged.subscribe((ingredient)=>{
-      this.ingredients.push(ingredient);   
+      this.ingredients =  ingredient //this.shoppingServ.getIngredients();
+      // this.ingredients.push(ingredient);   
   })
   }
   // newIngredients(ingredient:Ingredient){
   //   // this.ingredients.push(ingredient);
   // 
 //}
-
+onEditItem(index:number){
+this.shoppingServ.startedEditing.next(index)
+}
 
   ngOnDestroy(): void {
     this.igChanged.unsubscribe();
