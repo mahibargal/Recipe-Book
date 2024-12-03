@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { DataStorageService } from 'src/app/shared/recepe-storage.service';
 
 @Component({
@@ -6,11 +8,18 @@ import { DataStorageService } from 'src/app/shared/recepe-storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
-// @Output() featurSelected = new EventEmitter();
-  constructor(private dataSrvc:DataStorageService) { }
+export class HeaderComponent implements OnInit, OnDestroy {
+  // @Output() featurSelected = new EventEmitter();
+  private userSubscrip: Subscription;
+  isAuthenticated: boolean = false;
+  constructor(
+    private dataSrvc: DataStorageService,
+    private authSrvc: AuthService) { }
 
   ngOnInit(): void {
+    this.userSubscrip = this.authSrvc.currentUser.subscribe((user) => {
+      this.isAuthenticated = !!user;
+    })
   }
 
   //no need of event as handles by routing
@@ -21,7 +30,15 @@ export class HeaderComponent implements OnInit {
     this.dataSrvc.saveRecipeData();
   }
 
-  fetchRecipeData(){
+  fetchRecipeData() {
     this.dataSrvc.fetchRecipeData();
+  }
+
+  ngOnDestroy(): void {
+    this.userSubscrip.unsubscribe();
+  }
+
+  logout(){
+    this.authSrvc.logout();
   }
 }

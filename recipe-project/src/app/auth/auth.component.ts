@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
 import { AuthService } from "./auth.service";
 
 
@@ -14,9 +15,10 @@ export class AuthComponent {
     errorMsg:string = null;
     isLoading:boolean = false;
 
-    constructor(private authSrvc:AuthService){
-
-    }
+    constructor(
+        private authSrvc:AuthService,
+        private router:Router
+        ){}
 
     switch() {
         this.isLoggedIn = !this.isLoggedIn
@@ -33,6 +35,7 @@ export class AuthComponent {
         if (this.isLoggedIn) {
             this.authSrvc.signIn(email, password).subscribe((res) => {
                 this.isLoading = false;
+                this.router.navigate(['/recipies']);
 
             }, (err: any) => {
                 this.isLoading = false;
@@ -42,6 +45,7 @@ export class AuthComponent {
         } else {
             this.authSrvc.signUp(email, password).subscribe((res) => {
                 this.isLoading = false;
+                this.router.navigate(['/recipies']);
             }, (err) => {
                 this.isLoading = false;
                 this.errorMsg = err?.error?.error?.message
