@@ -21,6 +21,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { AuthComponent } from './auth/auth.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptorService';
+import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,9 @@ import { AuthInterceptorService } from './auth/auth-interceptorService';
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ import { AuthInterceptorService } from './auth/auth-interceptorService';
     RecipeService,
     {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptorService,multi:true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  // entryComponents: [AlertComponent]
 })
 export class AppModule { }
