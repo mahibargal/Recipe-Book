@@ -12,7 +12,7 @@ export class RecipeStartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dataSrvc.fetchRecipeData();
+    // this.dataSrvc.fetchRecipeData();
   }
 
 }
