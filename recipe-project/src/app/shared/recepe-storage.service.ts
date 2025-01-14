@@ -19,6 +19,7 @@ export class DataStorageService {
 
     saveRecipeData() {
         const recipes: Recipe[] = this.recipeSrvc.getRecipe();
+        console.log('adding recipe')
 
         return this.http.put('https://code-69c0d-default-rtdb.firebaseio.com/recipes.json', recipes).subscribe((res) => {
             console.log(res);
@@ -26,6 +27,7 @@ export class DataStorageService {
     }
 
     fetchRecipeData() {
+        console.log('fetching recipe')
         return this.authSrvc.currentUser.pipe(
             take(1),
             exhaustMap(user => {
