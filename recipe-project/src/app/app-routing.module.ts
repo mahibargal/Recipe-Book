@@ -15,18 +15,18 @@ const routes: Routes = [
     {
         path: '', redirectTo: 'recipies', pathMatch: 'full'
     },
-    {
-        path: 'recipies', component: RecipesComponent, canActivate:[AuthGuard], children:[
-            {path:'',component:RecipeStartComponent},
-            {path:'new',component:RecipeEditComponent},
-            {path:':id',component:RecipeDetailComponent},
-            {path:':id/edit',component:RecipeEditComponent},
+    // {
+    //     path: 'recipies', component: RecipesComponent, canActivate:[AuthGuard], children:[
+    //         {path:'',component:RecipeStartComponent},
+    //         {path:'new',component:RecipeEditComponent},
+    //         {path:':id',component:RecipeDetailComponent},
+    //         {path:':id/edit',component:RecipeEditComponent},
             
-        ]
-    },
-    {
-        path: 'shopping-list', component: ShoppingListComponent
-    },
+    //     ]
+    // },
+    // {
+    //     path: 'shopping-list', component: ShoppingListComponent
+    // },
 ]
 
 @NgModule({
